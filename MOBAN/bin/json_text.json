@@ -1,0 +1,70 @@
+{
+    "propertyInfo": [
+        {
+            "propertyName": "GWM_EPBSts",
+            "propertyType": "INT32_VEC",
+            "access": "R",
+            "changeMode": "ON_CHANGE",
+            "comment": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "signal": [
+                {
+                    "signaleName": "EPBSts",
+                    "messagName": "EPB1",
+                    "messageID": "0x16B",
+                    "firstCoding": "0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown",
+                    "secondCoding": "0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown",
+                    "isProjectExit": {
+                        "A07传统动力": true,
+                        "A07新能源": false,
+                        "A08传统动力": true
+                    }
+                },
+                {
+                    "signaleName": "EPBSts",
+                    "messagName": "EPB1",
+                    "messageID": "0x16B",
+                    "firstCoding": "0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown",
+                    "secondCoding": "0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown",
+                    "isProjectExit": {
+                        "A07传统动力": true,
+                        "A07新能源": false,
+                        "A08传统动力": true
+                    }
+                }
+            ]
+        },
+        {
+            "propertyName": "xxx",
+            "propertyType": "INT32_VEC",
+            "access": "R",
+            "changeMode": "ON_CHANGE",
+            "comment": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "signal": [
+                {
+                    "signaleName": "EPBSts",
+                    "messagName": "EPB1",
+                    "messageID": "0x16B",
+                    "firstCoding": "0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown",
+                    "secondCoding": "0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown",
+                    "isProjectExit": {
+                        "A07传统动力": true,
+                        "A07新能源": false,
+                        "A08传统动力": true
+                    }
+                },
+                {
+                    "signaleName": "EPBSts",
+                    "messagName": "EPB1",
+                    "messageID": "0x16B",
+                    "firstCoding": "0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown",
+                    "secondCoding": "0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown0x0:Released 0x1:Closed 0x2:In progress 0x3:Unknown",
+                    "isProjectExit": {
+                        "A07传统动力": true,
+                        "A07新能源": false,
+                        "A08传统动力": true
+                    }
+                }
+            ]
+        }
+    ]
+}
