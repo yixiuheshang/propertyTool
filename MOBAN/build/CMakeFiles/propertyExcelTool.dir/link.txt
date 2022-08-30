@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/propertyExcelTool.dir/main.cpp.o CMakeFiles/propertyExcelTool.dir/src/filterBase.cpp.o CMakeFiles/propertyExcelTool.dir/src/filterSub.cpp.o -o /home/liuxiang/Myproject/MOBAN/bin/propertyExcelTool   -L/home/liuxiang/Myproject/MOBAN/lib  -Wl,-rpath,/home/liuxiang/Myproject/MOBAN/lib -Wl,-Bstatic -ljsoncpp -Wl,-Bdynamic 

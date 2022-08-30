@@ -1,3 +1,0 @@
-/home/liuxiang/Myproject/MOBAN/build/CMakeFiles/propertyExcelTool.dir
-/home/liuxiang/Myproject/MOBAN/build/CMakeFiles/edit_cache.dir
-/home/liuxiang/Myproject/MOBAN/build/CMakeFiles/rebuild_cache.dir
