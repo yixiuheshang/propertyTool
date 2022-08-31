@@ -4,82 +4,64 @@
 #include <fstream>
 #include "json.h"
 /*
-è¾“å…¥ï¼šä¸€ä¸ªjsonæ ¼å¼çš„æ–‡ä»¶ï¼Œé‡Œé¢æ˜¯æ‰€æœ‰å¾…è¿‡æ»¤çš„ä¿¡å·å±æ€§
-è¾“å‡ºï¼šæ–‡ä»¶é€šè¿‡è¿‡æ»¤å™¨ï¼Œå‰©ä¸‹éœ€è¦è¿‡æ»¤çš„æ–‡ä»¶ä¿¡æ¯ï¼Œè¾“å‡ºè¿˜æ˜¯ä¸€ä¸ªjsonæ ¼å¼çš„æ–‡ä»¶
-ä¾‹å­ï¼š
-./propertyExcelTool merge json_text.json -->è¾“å‡º merge.json
-./propertyExcelTool combin  json_text.json -->è¾“å‡º combin.json
+ÊäÈë£ºÒ»¸öjson¸ñÊ½µÄÎÄ¼ş£¬ÀïÃæÊÇËùÓĞ´ı¹ıÂËµÄĞÅºÅÊôĞÔ
+Êä³ö£ºÎÄ¼şÍ¨¹ı¹ıÂËÆ÷£¬Ê£ÏÂĞèÒª¹ıÂËµÄÎÄ¼şĞÅÏ¢£¬Êä³ö»¹ÊÇÒ»¸öjson¸ñÊ½µÄÎÄ¼ş
+Àı×Ó£º
+./propertyExcelTool merge json_text.json -->Êä³ö merge.json
+./propertyExcelTool combin  json_text.json -->Êä³ö combin.json
 */
 
 using namespace std;
 using namespace Json;
 int main(int argc, char **argv) 
 {
-    // std::map<std::string, std::shared_ptr<FilterBase>> cmd = {
-    //     "merge" : std::make_shared<MergeFilter>,
-    //     "combin" : std::make_shared<CombinFilter>,
-    //     "specialTreat" : std::make_shared<Specialtreat>
-    // }
-    // if (*argv[1] == "merge") {
-    //     cmd.find(*argv[1]);
-    // }
-    
-    // filter->init();
-    // // æ•°æ®é€šè¿‡è¿‡æ»¤å™¨
-    // std::vector<std::shared_ptr<PropertyInfo>> output;
-    // filter->merge(output);
-    // std::vector<std::shared_ptr<PropertyInfo>> combinRet;
-    // combin(combinRet);
-    // std::vector<std::shared_ptr<PropertyInfo>> commentRet;
-    // specialTreat(commentRet); 
-    // // æœ€åå†ç”Ÿæˆæ–‡ä»¶ output.txt combinRet.txt commentRet.txt
-
-    // std::map<std::string, bool> D01 = {{"D01",false},{"P01",true}};
-    // std::map<std::string, bool> D02 = {{"D01",false},{"P01",true}};
-    // auto sig1 = std::make_shared<Signal>("1","2","3","4","5",D01);
-    // auto sig2 = std::make_shared<Signal>("1","2","3","4","5",D02);
-    // std::vector<std::shared_ptr<Signal>> signal = {sig1,sig2}; 
-    // PropertyInstance::getInstance().mPropertyInfo.emplace_back(std::make_shared<PropertyInfo>("1","2","3","4","5",signal));
-    // if (!PropertyInstance::getInstance().mPropertyInfo.empty()) {
-    //     std::cout << PropertyInstance::getInstance().mPropertyInfo[0]->mPropertyName << std::endl;
-    //     std::cout << PropertyInstance::getInstance().mPropertyInfo[0]->mPropertyType << std::endl;
-    //     std::cout << PropertyInstance::getInstance().mPropertyInfo[0]->mAccess << std::endl;
-    //     std::cout << PropertyInstance::getInstance().mPropertyInfo[0]->mChangeMode << std::endl;
-    //     std::cout << PropertyInstance::getInstance().mPropertyInfo[0]->mComment << std::endl;
-    // }
-
-    // ä½¿ç”¨jsonè§£ææ•°æ®
-    // ifstream ifs("json_text.json");
-    // if (ifs)
-    // {
-    //     string line, jsonStr;
-    //     while (getline(ifs, line))
-    //         jsonStr.append(line);
-    //     CharReader *reader = CharReaderBuilder().newCharReader();
-    //     Value root;
-    //     JSONCPP_STRING errs;
-    //     if (reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &root, &errs))
-    //     {
-    //         auto faceId = root["face"][0]["face_id"].asString();
-    //         auto imgWidth = root["img_width"].asInt();
-    //         auto imgHeight = root["img_height"].asInt();
-    //         auto resCode = root["res_code"].asString();
-    //         auto url = root["url"].asString();
-    //         cout << "face_id:\t" << faceId << endl;
-    //         cout << "img_width:\t" << imgWidth << endl;
-    //         cout << "img_height:\t" << imgHeight << endl;
-    //         cout << "res_code:\t" << resCode << endl;
-    //         cout << "url:\t\t" << url << endl;
-    //     }
-    //     else
-    //         cout << errs << endl;
-    //     delete reader;
-    // }
+    static std::map<const char*, const char*> projectMap = {
+        {"1","A07´«Í³¶¯Á¦"},
+        {"2","A07ĞÂÄÜÔ´"},
+        {"3","A08´«Í³¶¯Á¦"},
+        {"4","A08ĞÂÄÜÔ´"},
+        {"5","B02´«Í³¶¯Á¦"},
+        {"6","B02ĞÂÄÜÔ´"},
+        {"7","B03"},
+        {"8","B07/B16(¹úÄÚ&º£Íâ£©"},
+        {"9","D01/D02/D03´«Í³¶¯Á¦"},
+        {"10","D01/D02/D03ĞÂÄÜÔ´"},
+        {"11","D02º£ÍâP0"},
+        {"12","D02º£ÍâP2"},
+        {"13","EC24"},
+        {"14","EC24º£Íâ"},
+        {"15","EC31"},
+        {"16","ES13"},
+        {"17","ES24"},
+        {"18","P01º£ÍâHEV¶¯Á¦"},
+        {"19","P01º£Íâ´«Í³¶¯Á¦"},
+        {"20","P02´«Í³¶¯Á¦"},
+        {"21","P02º£Íâ´«Í³¶¯Á¦"},
+        {"22","P02º£ÍâĞÂÄÜÔ´"},
+        {"23","P02ĞÂÄÜÔ´"},
+        {"24","P03´«Í³¶¯Á¦"},
+        {"25","P03º£Íâ´«Í³¶¯Á¦"},
+        {"26","P03º£ÍâĞÂÄÜÔ´"},
+        {"27","P03ĞÂÄÜÔ´"},
+        {"28","P05PHEV6*6"},
+        {"29","P05´«Í³¶¯Á¦"},
+        {"30","P05º£ÍâHEV"},
+        {"31","P05º£Íâ´«Í³¶¯Á¦"},
+        {"32","P05ĞÂÄÜÔ´"},
+        {"33","P09 EV"},
+        {"34","P09´«Í³¶¯Á¦"},
+        {"35","P09ĞÂÄÜÔ´"},
+        {"36","P11"}    
+    };
 
     std::cout << "start xxx" << std::endl;
     std::cout << "argv[1] : " << argv[1] << std::endl;
     std::cout << "argv[2] : " << argv[2] << std::endl;
     std::cout << "argv[3] : " << argv[3] << std::endl;
+
+    if () {
+
+    }    
     switch (argv[1][0])
     {
     case 'm': {

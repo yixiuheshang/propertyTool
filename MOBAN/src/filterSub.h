@@ -8,10 +8,6 @@ private:
     inline int equals(T a, T b){
         return a == b;
     }
-
-    // 功能：获取数组中元素的个数 
-    // 参数1：需统计的数组，仅支持内置类型的数组
-    // 参数2：保存结果，元素以及对应元素对应个数	
     template<typename T>
     void check(std::vector<T> &src, std::map<T,int> &dst);
 

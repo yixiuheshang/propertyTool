@@ -10,8 +10,8 @@ struct Signal
     std::string mSignaleName;
     std::string mMessagName;
     std::string mMessageID;
-    std::string mFirstCoding; // æ¯ä¸ªä¿¡å·å¯¹åº”çš„coding
-    std::string mSecondCoding; // æ¥å£å¯¹åº”çš„coding
+    std::string mFirstCoding; // Ã¿¸öĞÅºÅ¶ÔÓ¦µÄcoding
+    std::string mSecondCoding; // ½Ó¿Ú¶ÔÓ¦µÄcoding
     /*
         {
             "D01" : false,
@@ -41,7 +41,7 @@ struct PropertyInfo
     std::string mAccess;
     std::string mChangeMode; 
     std::string mComment;
-    std::vector<std::shared_ptr<Signal>> mSignal; // ä¸€ä¸ªæ¥å£å¯¹åº”å‡ ä¸ªä¿¡å·
+    std::vector<std::shared_ptr<Signal>> mSignal; // Ò»¸ö½Ó¿Ú¶ÔÓ¦¼¸¸öĞÅºÅ
     PropertyInfo(const std::string &propertyName, 
                  const std::string &propertyType,
                  const std::string &access,
@@ -56,7 +56,7 @@ struct PropertyInfo
               mSignal(signal) {}                   
 };
 
-// ä¿¡å·æ•°æ®å•ä¾‹
+// ĞÅºÅÊı¾İµ¥Àı
 class PropertyInstance 
 {
 public:
@@ -83,9 +83,9 @@ public:
 private:
     PropertyInstance() = default;
 };
-extern PropertyInstance& getPropertyInstance(); // æä¾›ç»™å¤–éƒ¨ä½¿ç”¨çš„æ¥å£
+extern PropertyInstance& getPropertyInstance(); // Ìá¹©¸øÍâ²¿Ê¹ÓÃµÄ½Ó¿Ú
 
-// è§£æjsonæ–‡ä»¶çš„ç±»
+// ½âÎöjsonÎÄ¼şµÄÀà
 class ParseJSON 
 {
 
@@ -94,7 +94,7 @@ class ParseJSON
 class FilterBase
 {
 public:
-    virtual void filter(const char* filename, const char* projectName) = 0; // è¿‡æ»¤å™¨,ä¼ å…¥éœ€è¦æ‰“å¼€çš„æ–‡ä»¶å
+    virtual void filter(const char* filename, const char* projectName) = 0; // ¹ıÂËÆ÷,´«ÈëĞèÒª´ò¿ªµÄÎÄ¼şÃû
     FilterBase() = default;
     virtual ~FilterBase() {}
 };
