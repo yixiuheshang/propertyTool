@@ -94,7 +94,7 @@ class ParseJSON
 class FilterBase
 {
 public:
-    virtual void filter(const char* filename) = 0; // 过滤器,传入需要打开的文件名
+    virtual void filter(const char* filename, const char* projectName) = 0; // 过滤器,传入需要打开的文件名
     FilterBase() = default;
     virtual ~FilterBase() {}
 };

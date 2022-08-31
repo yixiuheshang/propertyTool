@@ -79,13 +79,14 @@ int main(int argc, char **argv)
     std::cout << "start xxx" << std::endl;
     std::cout << "argv[1] : " << argv[1] << std::endl;
     std::cout << "argv[2] : " << argv[2] << std::endl;
+    std::cout << "argv[3] : " << argv[3] << std::endl;
     switch (argv[1][0])
     {
     case 'm': {
         std::cout << "merge" << std::endl;
         auto mergeFilter = std::make_shared<MergeFilter>();
         // mergeFilter->init();
-        mergeFilter->filter(argv[2]);
+        mergeFilter->filter(argv[2], argv[3]);
         break;
     }
         
@@ -93,7 +94,7 @@ int main(int argc, char **argv)
         std::cout << "combin" << std::endl;
         auto combinFilter = std::make_shared<CombinFilter>();
         // combinFilter->init();
-        combinFilter->filter(argv[2]);
+        combinFilter->filter(argv[2], argv[3]);
         break;
     }
     
@@ -101,7 +102,7 @@ int main(int argc, char **argv)
         std::cout << "special" << std::endl;
         auto specialtreatFilter = std::make_shared<Specialtreat>();
         // specialtreatFilter->init();
-        specialtreatFilter->filter(argv[2]);
+        specialtreatFilter->filter(argv[2], argv[3]);
         break;
     }
 
