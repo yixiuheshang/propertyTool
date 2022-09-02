@@ -27,12 +27,11 @@ void MergeFilter::check(std::vector<T> &src, std::map<T,int> &dst)
     }
 }
 
-void MergeFilter::filter(const char* filename, const char* projectName) 
+void MergeFilter::filter(const char* filename, const char* projectKey) 
 {
-    std::string proStr(projectName);
     std::cout << "merge filter" << std::endl;
     std::cout << "filename :" << filename << std::endl;
-    std::cout << "projectName :" << proStr << std::endl;
+    std::cout << "projectKey :" << projectKey << std::endl;
 
     Json::Reader reader;
     Json::Value root;
@@ -40,13 +39,18 @@ void MergeFilter::filter(const char* filename, const char* projectName)
     std::ifstream ifs; 
     ifs.open (filename, std::ios::in);
 
+    auto projectMapIter = projectMap.find(projectKey);
+    if (projectMapIter == projectMap.end()) {
+        std::cout << projectKey << " is not in map!" << std::endl;
+        return;
+    }
     std::ofstream os;
     std::string outputFileName = "merge";
-    // outputFileName.append(proStr);
+    outputFileName.append(projectKey);
     outputFileName.append(".json");
 
-	os.open(outputFileName, std::ios::out);
-	Json::Value propertyInfos;
+    os.open(outputFileName, std::ios::out);
+    Json::Value propertyInfos;
 
     if (reader.parse(ifs, root, false)) 
     { 
@@ -70,20 +74,20 @@ void MergeFilter::filter(const char* filename, const char* projectName)
                             Json::Value::Members member = valSignal[j]["isProjectExit"].getMemberNames();
                             auto iter = member.begin();
                             for (; iter != member.end(); ++iter) {
-                                if (*iter == projectName) {
+                                if (*iter == projectMapIter->second) {
                                     break;
                                 }
                             }
                             if (iter == member.end()) {
-                                std::cout << projectName << "not found!" << std::endl;
+                                std::cout << projectMapIter->second << "not found!" << std::endl;
                                 return;
                             }
                            
                             // std::cout << valSignal[j]["signaleName"].asString() << " -->." <<std::endl;
-                            bool isNeedMerge = valSignal[j]["isProjectExit"][projectName].asBool();
+                            bool isNeedMerge = valSignal[j]["isProjectExit"][projectMapIter->second].asBool();
                             std::cout << root["propertyInfo"][i]["propertyName"].asString() << "-->" 
                                       << valSignal[j]["signaleName"].asString() <<" --> " 
-                                      << projectName << " --> " << isNeedMerge << std::endl;        
+                                      << *iter << " --> " << isNeedMerge << std::endl;        
                             if (isNeedMerge) {
                                 propertyInfo["propertyName"] = root["propertyInfo"][i]["propertyName"];
                                 sig["signalName"] = valSignal[j]["signaleName"];
@@ -105,39 +109,50 @@ void MergeFilter::filter(const char* filename, const char* projectName)
     ifs.close();
     
     Json::StyledWriter sw;
-	os << sw.write(propertyInfos);
-	os.close();
+    os << sw.write(propertyInfos);
+    os.close();
 }
 
-void CombinFilter::filter(const char* filename, const char* projectName)
+void MergeFilter::allOutput(const char* filename)
+{  
+    for (auto iter : projectMap) {
+        filter(filename, iter.first);
+    }
+}
+
+void CombinFilter::filter(const char* filename, const char* projectKey)
 {
-    std::string proStr(projectName);
     std::cout << "combin filter" << std::endl;
     std::cout << "filename :" << filename << std::endl;
-    std::cout << "projectName :" << proStr << std::endl;
+    std::cout << "projectKey :" << projectKey << std::endl;
 
     Json::Reader reader;
-    Json::Value root;  
+    Json::Value root;
  
     std::ifstream ifs; 
     ifs.open (filename, std::ios::in);
 
+    auto projectMapIter = projectMap.find(projectKey);
+    if (projectMapIter == projectMap.end()) {
+        std::cout << projectKey << " is not in map!" << std::endl;
+        return;
+    }
     std::ofstream os;
     std::string outputFileName = "combin";
-    // outputFileName.append(proStr);
+    outputFileName.append(projectKey);
     outputFileName.append(".json");
 
-	os.open(outputFileName, std::ios::out);
-	Json::Value propertyInfos;
+    os.open(outputFileName, std::ios::out);
+    Json::Value propertyInfos;
 
     if (reader.parse(ifs, root, false)) 
     { 
         std::string code; 
-        if (!root["propertyInfo"].isNull()) {  
+        if (!root["propertyInfo"].isNull()) { 
             int size = root["propertyInfo"].size();
             // std::cout << "propertyInfo " << "size :" << size << std::endl;
             
-            for(int i = 0; i < size; ++i)  
+            for(int i = 0; i < size; ++i)
             { 
                 std::string propertyType = root["propertyInfo"][i]["propertyType"].asString();
                 // std::cout << "propertyType :" << propertyType << std::endl;
@@ -152,23 +167,24 @@ void CombinFilter::filter(const char* filename, const char* projectName)
                             Json::Value::Members member = valSignal[j]["isProjectExit"].getMemberNames();
                             auto iter = member.begin();
                             for (; iter != member.end(); ++iter) {
-                                if (*iter == projectName) {
+                                if (*iter == projectMapIter->second) {
                                     break;
                                 }
                             }
                             if (iter == member.end()) {
-                                std::cout << projectName << "not found!" << std::endl;
+                                std::cout << projectMapIter->second << "not found!" << std::endl;
                                 return;
                             }
                            
                             // std::cout << valSignal[j]["signaleName"].asString() << " -->." <<std::endl;
-                            bool isNeedMerge = valSignal[j]["isProjectExit"][projectName].asBool();
+                            bool isNeedCombin = valSignal[j]["isProjectExit"][projectMapIter->second].asBool();
                             std::cout << root["propertyInfo"][i]["propertyName"].asString() << "-->" 
                                       << valSignal[j]["signaleName"].asString() <<" --> " 
-                                      << projectName << " --> " << isNeedMerge << std::endl;        
-                            if (isNeedMerge) {
+                                      << *iter << " --> " << isNeedCombin << std::endl;        
+                            if (isNeedCombin) {
                                 propertyInfo["propertyName"] = root["propertyInfo"][i]["propertyName"];
                                 sig["signalName"] = valSignal[j]["signaleName"];
+                                sig["messagName"] = valSignal[j]["messagName"];
                                 if (!sig.empty()) {
                                     propertyInfo["signal"].append(sig);
                                 }
@@ -186,11 +202,18 @@ void CombinFilter::filter(const char* filename, const char* projectName)
     ifs.close();
     
     Json::StyledWriter sw;
-	os << sw.write(propertyInfos);
-	os.close();
+    os << sw.write(propertyInfos);
+    os.close();
 }
 
-void Specialtreat::filter(const char* filename, const char* projectName)
+void CombinFilter::allOutput(const char* filename)
+{  
+    for (auto iter : projectMap) {
+        filter(filename, iter.first);
+    }
+}
+
+void Specialtreat::filter(const char* filename, const char* projectKey)
 {
     
 }

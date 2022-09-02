@@ -15,7 +15,8 @@ public:
     MergeFilter(/* args */) = default; 
     virtual ~MergeFilter() override {}
 
-    virtual void filter(const char* filename, const char* projectName) override;
+    virtual void allOutput(const char* filename) override;
+    virtual void filter(const char* filename, const char* projectKey) override;
 };
 
 class CombinFilter : public FilterBase
@@ -26,7 +27,8 @@ public:
     CombinFilter(/* args */) = default; 
     virtual ~CombinFilter() override {}
 
-    virtual void filter(const char* filename, const char* projectName) override;
+    virtual void allOutput(const char* filename) override;
+    virtual void filter(const char* filename, const char* projectKey) override;
 };
 
 class Specialtreat : public FilterBase
@@ -37,5 +39,5 @@ public:
     Specialtreat(/* args */) = default; 
     virtual ~Specialtreat() override {}
 
-    virtual void filter(const char* filename, const char* projectName) override;
+    virtual void filter(const char* filename, const char* projectKey) override;
 };

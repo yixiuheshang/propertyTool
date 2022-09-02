@@ -5,6 +5,45 @@
 #include "STLAux.h"
 #include "json.h"
 
+static const std::map<const char*, const char*> projectMap = {
+        {"1","A07传统动力"},
+        {"2","A07新能源"},
+        {"3","A08传统动力"},
+        {"4","A08新能源"},
+        {"5","B02传统动力"},
+        {"6","B02新能源"},
+        {"7","B03"},
+        {"8","B07/B16(国内&海外）"},
+        {"9","D01/D02/D03传统动力"},
+        {"10","D01/D02/D03新能源"},
+        {"11","D02海外P0"},
+        {"12","D02海外P2"},
+        {"13","EC24"},
+        {"14","EC24海外"},
+        {"15","EC31"},
+        {"16","ES13"},
+        {"17","ES24"},
+        {"18","P01海外HEV动力"},
+        {"19","P01海外传统动力"},
+        {"20","P02传统动力"},
+        {"21","P02海外传统动力"},
+        {"22","P02海外新能源"},
+        {"23","P02新能源"},
+        {"24","P03传统动力"},
+        {"25","P03海外传统动力"},
+        {"26","P03海外新能源"},
+        {"27","P03新能源"},
+        {"28","P05PHEV6*6"},
+        {"29","P05传统动力"},
+        {"30","P05海外HEV"},
+        {"31","P05海外传统动力"},
+        {"32","P05新能源"},
+        {"33","P09 EV"},
+        {"34","P09传统动力"},
+        {"35","P09新能源"},
+        {"36","P11"}    
+    };
+
 struct Signal
 {
     std::string mSignaleName;
@@ -93,10 +132,12 @@ class ParseJSON
 
 class FilterBase
 {
-public:
-    virtual void filter(const char* filename, const char* projectName) = 0; // 过滤器,传入需要打开的文件名
+public: 
     FilterBase() = default;
     virtual ~FilterBase() {}
+
+    virtual void allOutput(const char* filename) = 0;
+    virtual void filter(const char* filename, const char* projectKey) = 0; // 过滤器,传入需要打开的文件名
 };
 
 
