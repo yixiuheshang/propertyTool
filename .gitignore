@@ -1,0 +1,5 @@
+MOBAN/build/*
+MOBAN/bin/*
+MOBAN/cfg/*
+!.gitkeep
+.vs*
