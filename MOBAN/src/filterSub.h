@@ -30,14 +30,3 @@ public:
     virtual void allOutput(const char* filename) override;
     virtual void filter(const char* filename, const char* projectKey) override;
 };
-
-class Specialtreat : public FilterBase
-{
-private:
-    const std::vector<std::shared_ptr<PropertyInfo>> mOldData;
-public:
-    Specialtreat(/* args */) = default; 
-    virtual ~Specialtreat() override {}
-
-    virtual void filter(const char* filename, const char* projectKey) override;
-};

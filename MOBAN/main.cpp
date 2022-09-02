@@ -38,15 +38,7 @@ int main(int argc, char **argv)
         combinFilter->filter(argv[2], argv[3]);
         break;
     }
-    
-    case 's': {
-        std::cout << "special" << std::endl;
-        auto specialtreatFilter = std::make_shared<Specialtreat>();
-        // specialtreatFilter->init();
-        specialtreatFilter->filter(argv[2], argv[3]);
-        break;
-    }
-    
+ 
     case 'a': {
         // 这里一键输出所有项目的merge和combin
         std::cout << "all output " << std::endl;
