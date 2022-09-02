@@ -212,8 +212,3 @@ void CombinFilter::allOutput(const char* filename)
         filter(filename, iter.first);
     }
 }
-
-void Specialtreat::filter(const char* filename, const char* projectKey)
-{
-    
-}
