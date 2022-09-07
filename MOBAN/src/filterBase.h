@@ -138,6 +138,10 @@ public:
 
     virtual void allOutput(const char* filename) = 0;
     virtual void filter(const char* filename, const char* projectKey) = 0; // 过滤器,传入需要打开的文件名
+
+    void parseJson(const char* filename, Json::Value &root);
+    void jsonOutput(const std::string &outputFileName, const Json::Value &propertyInfos);
+    void txtOutput(const std::string &outputFileName, const Json::Value &propertyInfos);
 };
 
 
