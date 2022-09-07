@@ -16,7 +16,7 @@ public:
     virtual ~MergeFilter() override {}
 
     virtual void allOutput(const char* filename) override;
-    virtual void filter(const char* filename, const char* projectKey) override;
+    virtual void filter(const char* filename, std::string projectKey) override;
 };
 
 class CombinFilter : public FilterBase
@@ -28,5 +28,5 @@ public:
     virtual ~CombinFilter() override {}
 
     virtual void allOutput(const char* filename) override;
-    virtual void filter(const char* filename, const char* projectKey) override;
+    virtual void filter(const char* filename, std::string projectKey) override;
 };

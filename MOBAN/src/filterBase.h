@@ -5,7 +5,7 @@
 #include "STLAux.h"
 #include "json.h"
 
-static const std::map<const char*, const char*> projectMap = {
+static const std::map<const std::string, const std::string> projectMap = {
         {"1","A07传统动力"},
         {"2","A07新能源"},
         {"3","A08传统动力"},
@@ -137,7 +137,7 @@ public:
     virtual ~FilterBase() {}
 
     virtual void allOutput(const char* filename) = 0;
-    virtual void filter(const char* filename, const char* projectKey) = 0; // 过滤器,传入需要打开的文件名
+    virtual void filter(const char* filename, std::string projectKey) = 0; // 过滤器,传入需要打开的文件名
 
     void parseJson(const char* filename, Json::Value &root);
     void jsonOutput(const std::string &outputFileName, const Json::Value &propertyInfos);
