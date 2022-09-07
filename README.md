@@ -1,13 +1,67 @@
-# propertyTool
-# 此款软件仅供学习使用
+# 使用说明
+{
+{"1","A07传统动力"},
+{"2","A07新能源"},
+{"3","A08传统动力"},
+{"4","A08新能源"},
+{"5","B02传统动力"},
+{"6","B02新能源"},
+{"7","B03"},
+{"8","B07/B16(国内&海外）"},
+{"9","D01/D02/D03传统动力"},
+{"10","D01/D02/D03新能源"},
+{"11","D02海外P0"},
+{"12","D02海外P2"},
+{"13","EC24"},
+{"14","EC24海外"},
+{"15","EC31"},
+{"16","ES13"},
+{"17","ES24"},
+{"18","P01海外HEV动力"},
+{"19","P01海外传统动力"},
+{"20","P02传统动力"},
+{"21","P02海外传统动力"},
+{"22","P02海外新能源"},
+{"23","P02新能源"},
+{"24","P03传统动力"},
+{"25","P03海外传统动力"},
+{"26","P03海外新能源"},
+{"27","P03新能源"},
+{"28","P05PHEV6*6"},
+{"29","P05传统动力"},
+{"30","P05海外HEV"},
+{"31","P05海外传统动力"},
+{"32","P05新能源"},
+{"33","P09 EV"},
+{"34","P09传统动力"},
+{"35","P09新能源"},
+{"36","P11"}
+}
 
-# 编译的时候请按照一下方法
-cd build 
-cmake ..
-make
-# 此时会生成可执行文件
-# 使用方法如下 json_text.json 可以是任意json文件
-# -->输出 merge.json
-./propertyExcelTool merge json_text.json 
-# -->输出 combin.json
-./propertyExcelTool combin  json_text.json 
+输入：将v3.5文档映射的json文件如：propertyInfo.json 放入bin目录下
+
+输出：输出文档如：combin.json merge.json ，分别是接口对应的信号需要组合、接口对应的信号需要合并
+
+
+
+操作步骤
+
+1.下载软件压缩包：propertyTool.tar.gz
+
+2.将压缩上传到linux环境解压
+
+3.进入build目录执行：cmake ..;make   这是在bin目录下会生成可执行文件propertyExcelTool 如下图
+
+
+
+4.将v3.5文档映射的json文件如：propertyInfo.json 放入bin目录下
+
+5.筛选A07传统动力项目的合并信号执行 ./propertyExcelTool m propertyInfo.json 1
+
+6.此时在bin目录下就会生成merge1.json文件，这就是需要合并的A07传统动力信号文件
+
+7.组合信号输入./propertyExcelTool c propertyInfo.json 1
+
+8.如何想一键筛选所有项目的合并组合信号则执行：./propertyExcelTool a propertyInfo.json
+
+注意：如果bin目录已经有propertyExcelTool，则直接执行4-8
