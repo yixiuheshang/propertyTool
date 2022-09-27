@@ -1,5 +1,6 @@
 #include "filterBase.h"
 #include <fstream>
+#include <set>
 
 PropertyInstance& getPropertyInstance()
 {
@@ -31,16 +32,28 @@ void FilterBase::jsonOutput(const std::string &outputFileName, const Json::Value
 void FilterBase::txtOutput(const std::string &outputFileName, const Json::Value &propertyInfos)
 {
     std::ofstream os;
+    std::set<std::string> sigSet; // 去重
+    std::string signalNameAndMassageID;
     os.open(outputFileName, std::ios::out);
     if (!propertyInfos["propertyInfo"].isNull()) {
         for(int i = 0; i < propertyInfos["propertyInfo"].size(); ++i) {
             os << propertyInfos["propertyInfo"][i]["propertyName"].asString() << " ";
             for (int j = 0; j < propertyInfos["propertyInfo"][i]["signal"].size(); ++j) {
-                os << propertyInfos["propertyInfo"][i]["signal"][j]["signalName"].asString() << " ";
+                signalNameAndMassageID = propertyInfos["propertyInfo"][i]["signal"][j]["signalName"].asString() + "_" + propertyInfos["propertyInfo"][i]["signal"][j]["messageID"].asString();
+                sigSet.insert(signalNameAndMassageID);
+            }
+            for (auto &it : sigSet) {
+                std::cout << it << std::endl;
+                os << it << " ";
             }
             os << std::endl;
         }
     }
     
     os.close();
+}
+
+void fiterSameNameSignal(Json::Value &propertyInfos)
+{
+
 }

@@ -89,7 +89,11 @@ void MergeFilter::filter(const char* filename, std::string projectKey)
     std::string outputFileName = "merge";
     std::string outputJson = outputFileName.append(projectKey);
     jsonOutput(outputJson.append(".json"), propertyInfos);
+    
+    // 过滤掉一样的信号即：signalName+massegeID一样的
+    // fiterSameNameSignal(propertyInfos);
 
+    // 输出的信号需要加上massegeID：signalName+massegeID
     std::string outputTXT = outputFileName;
     txtOutput(outputTXT.append(".txt"), propertyInfos);
 }
