@@ -21,11 +21,9 @@ file(GLOB SRC_LIST
 )
 
 link_directories(${PROJECT_SOURCE_DIR}/lib)
-# 指定可执行文件存放目录
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
-aux_source_directory(. SRC_LIST) # 搜索当前目录下的所有.cpp文件
+aux_source_directory(. SRC_LIST) 
 # add_executable(propertyExcelTool ${SRC_LIST})
-# 构建可执行程序
 add_executable(propertyExcelTool ${SRC_LIST})
 target_link_libraries(propertyExcelTool libjsoncpp.a)
