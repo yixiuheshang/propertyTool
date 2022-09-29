@@ -51,7 +51,7 @@ void MergeFilter::filter(const char* filename, std::string projectKey)
             Json::Value valSignal = root["propertyInfo"][i]["signal"]; 
             int signalSize = valSignal.size();
             Json::Value propertyInfo;
-            if (signalSize > 1 && propertyType != "INT32_VEC" && propertyType != "FLOAT_VEC") {
+            if (signalSize > 1) {
                 Json::Value sig;
                 for (int j=0; j<signalSize; j++) {
                     // ======================================================
