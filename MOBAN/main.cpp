@@ -2,13 +2,17 @@
 #include "filterBase.h"
 #include "filterSub.h"
 #include <fstream>
+#ifdef WIN32
+#include "json/json.h"
+#else
 #include "json.h"
+#endif
 /*
-ÊäÈë£ºÒ»¸öjson¸ñÊ½µÄÎÄ¼ş£¬ÀïÃæÊÇËùÓĞ´ı¹ıÂËµÄĞÅºÅÊôĞÔ
-Êä³ö£ºÎÄ¼şÍ¨¹ı¹ıÂËÆ÷£¬Ê£ÏÂĞèÒª¹ıÂËµÄÎÄ¼şĞÅÏ¢£¬Êä³ö»¹ÊÇÒ»¸öjson¸ñÊ½µÄÎÄ¼ş
-Àı×Ó£º
-./propertyExcelTool merge json_text.json -->Êä³ö merge.json
-./propertyExcelTool combin  json_text.json -->Êä³ö combin.json
+ï¿½ï¿½ï¿½ë£ºÒ»ï¿½ï¿½jsonï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ëµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½jsonï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ä¼ï¿½
+ï¿½ï¿½ï¿½Ó£ï¿½
+./propertyExcelTool merge json_text.json -->ï¿½ï¿½ï¿½ merge.json
+./propertyExcelTool combin  json_text.json -->ï¿½ï¿½ï¿½ combin.json
 */
 
 using namespace std;
@@ -40,7 +44,7 @@ int main(int argc, char **argv)
     }
  
     case 'a': {
-        // ÕâÀïÒ»¼üÊä³öËùÓĞÏîÄ¿µÄmergeºÍcombin
+        // ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½mergeï¿½ï¿½combin
         std::cout << "all output " << std::endl;
         auto combin = std::make_unique<CombinFilter>();
         // combinFilter->init();

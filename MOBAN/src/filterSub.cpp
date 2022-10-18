@@ -1,7 +1,12 @@
 #include <iostream>
 #include <fstream>
-#include "json.h"
 #include "filterSub.h"
+#ifdef WIN32
+#include "json/json.h"
+#else
+#include "json.h"
+#endif
+
 
 template<typename T>
 void MergeFilter::check(std::vector<T> &src, std::map<T,int> &dst)
