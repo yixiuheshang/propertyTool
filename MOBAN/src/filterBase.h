@@ -9,45 +9,54 @@
 #include "json.h"
 #endif
 
-
-// static const std::map<const std::string, const std::string> projectMap = {
-//     {"1","A07ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"2","A07ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"3","A08ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"4","A08ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"5","B02ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"6","B02ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"7","B03"},
-//     {"8","B07/B16(ï¿½ï¿½ï¿½ï¿½&ï¿½ï¿½ï¿½â£©"},
-//     {"9","D01/D02/D03ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"10","D01/D02/D03ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"11","D02ï¿½ï¿½ï¿½ï¿½P0"},
-//     {"12","D02ï¿½ï¿½ï¿½ï¿½P2"},
-//     {"13","EC24"},
-//     {"14","EC24ï¿½ï¿½ï¿½ï¿½"},
-//     {"15","EC31"},
-//     {"16","ES13"},
-//     {"17","ES24"},
-//     {"18","P01ï¿½ï¿½ï¿½ï¿½HEVï¿½ï¿½ï¿½ï¿½"},
-//     {"19","P01ï¿½ï¿½ï¿½â´«Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"20","P02ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"21","P02ï¿½ï¿½ï¿½â´«Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"22","P02ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"23","P02ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"24","P03ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"25","P03ï¿½ï¿½ï¿½â´«Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"26","P03ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"27","P03ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"28","P05PHEV6*6"},
-//     {"29","P05ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"30","P05ï¿½ï¿½ï¿½ï¿½HEV"},
-//     {"31","P05ï¿½ï¿½ï¿½â´«Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"32","P05ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"33","P09 EV"},
-//     {"34","P09ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½"},
-//     {"35","P09ï¿½ï¿½ï¿½ï¿½Ô´"},
-//     {"36","P11"}    
-// };
+//carType v3.5ÖÐ¡°³µÐÍ£¨±íÊ¾Êµ¼Ê×îÐÂ°æ¾ØÕóÐÅºÅÓÐÎÞ£©(¹úÄÚº£Íâ¹²ÓÃ)¡±¶ÔÓ¦ÁÐ
+static std::string GetProjectName(std::string& carType)
+{
+    if (0 == carType.find("B07"))
+    {
+        return "B16";
+    }
+    else if (0 == carType.find("D01"))
+    {
+        return "D01";
+    }
+    else if (0 == carType.find("EC24"))
+    {
+        return "EC24";
+    }
+    else if (0 == carType.find("EC31"))
+    {
+        return "EC31";
+    }
+    else if (0 == carType.find("P01"))
+    {
+        return "P01";
+    }
+    else if (0 == carType.find("P02"))
+    {
+        return "P02";
+    }
+    else if (0 == carType.find("P03"))
+    {
+        return "P03";
+    }
+    else if (0 == carType.find("P05"))
+    {
+        return "P05";
+    }
+    else if (0 == carType.find("P09"))
+    {
+        return "P09";
+    }
+    else if (0 == carType.find("P11"))
+    {
+        return "P11";
+    }
+    else
+    {
+        return "";
+    }
+}
 
 static const std::map<const std::string, const std::vector<std::string>> projectMap = {
     {"A07",{"A07´«Í³¶¯Á¦","A07ÐÂÄÜÔ´"}},
@@ -149,7 +158,7 @@ public:
     virtual ~FilterBase() {}
 
     virtual void allOutput(const char* filename) = 0;
-    virtual void filter(const char* filename, std::string projectKey) = 0;
+    virtual void filter(const char* filename, std::string projectName) = 0;
 
     void parseJson(const char* filename, Json::Value &root);
     void jsonOutput(const std::string &outputFileName, const Json::Value &propertyInfos);
